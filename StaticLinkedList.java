@@ -1,6 +1,6 @@
 
 // Learn LL step by step 
-class MyLinkedList {
+class StaticLinkedList {
     // Inner class Node
     private class Node {
         int val;       // stores data (the value in this node)
@@ -16,13 +16,13 @@ class MyLinkedList {
     private int size;
 
     // Default constructor
-    public MyLinkedList() {
+    public StaticLinkedList() {
         this.head = null;
         this.size = 0;
     }
 
     // Constructor that builds LL from array
-    public MyLinkedList(int[] values) {
+    public StaticLinkedList(int[] values) {
         if (values.length == 0) {
             head = null;
             size = 0;
@@ -32,7 +32,7 @@ class MyLinkedList {
         int counter = 0 ;
         Node curr = head;
          while(counter < values.length){
-            curr.next = new Node(values[i]);
+            curr.next = new Node(values[counter]);
             curr = curr.next;
             size++;
             counter++;
@@ -52,7 +52,7 @@ class MyLinkedList {
 
     // Test class with main method
     public static void main(String[] args) {
-        MyLinkedList list = new MyLinkedList(new int[]{5, 10, 15, 20});
+        StaticLinkedList list = new StaticLinkedList(new int[]{5, 10, 15, 20});
         list.printList();  // Output: 5 -> 10 -> 15 -> 20 -> null
     }
 }
