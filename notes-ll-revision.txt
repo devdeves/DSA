@@ -1,0 +1,98 @@
+            Notes: Linked List with Inner Class in Java
+-------------------------------------------
+
+1. Inner Class Concept
+- Inner class = class defined inside another class.
+- For Linked List, Node fits perfectly as an inner class inside LinkedList.
+
+Example:
+class LinkedList {
+    private Node head;
+    private int size;
+
+    // Inner class Node
+    private class Node {
+        int val;
+        Node next;
+        Node(int val) {
+            this.val = val;
+            this.next = null;
+        }
+    }
+}
+
+-------------------------------------------
+
+2. Constructor
+- By default, head = null and size = 0.
+- Best practice: explicitly set them in a constructor.
+
+public LinkedList() {
+    this.head = null;
+    this.size = 0;
+}
+
+- Both below are same:
+head = null; size = 0;
+this.head = null; this.size = 0;
+
+- Difference → "this" makes it explicit, "public" makes constructor accessible outside.
+
+-------------------------------------------
+
+3. Size Handling
+- size should start at 0 in constructor.
+- Update when modifying list:
+  - insert → size++
+  - delete → size--
+
+-------------------------------------------
+
+4. Get Method
+- Returns value at given index.
+- Indexing starts at 0.
+- Handle invalid cases.
+
+public int get(int index) {
+    if (index < 0 || index >= size) {
+        return -1; // invalid
+    }
+
+    Node curr = head;
+    for (int i = 0; i < index; i++) {
+        curr = curr.next;
+    }
+    return curr.val;
+}
+
+-------------------------------------------
+
+5. Add at Index
+- Insert before the index-th node.
+
+Conditions:
+1. index == 0 → insert at head
+2. 0 < index < size → insert in middle
+3. index == size → insert at tail
+4. index > size → do nothing
+5. index < 0 → treat as addAtHead
+
+-------------------------------------------
+
+Example Cases
+- List = 10 -> 20 -> 30 (size = 3)
+
+Operation              → Result
+addAtIndex(0, 5)       → 5 -> 10 -> 20 -> 30
+addAtIndex(1, 15)      → 10 -> 15 -> 20 -> 30
+addAtIndex(3, 40)      → 10 -> 20 -> 30 -> 40
+addAtIndex(5, 50)      → 10 -> 20 -> 30 (ignored)
+
+-------------------------------------------
+
+Summary
+- Inner class keeps Node inside LinkedList.
+- Constructor sets head = null, size = 0.
+- Size updated on every insert/delete.
+- get(index) handles invalid cases and traverses nodes.
+- addAtIndex follows rules for head, middle, end, and invalid positions.
